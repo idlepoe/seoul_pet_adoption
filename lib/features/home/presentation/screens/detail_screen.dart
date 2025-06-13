@@ -7,6 +7,10 @@ import 'package:seoul_pet_adoption/features/home/presentation/widgets/chips.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter/gestures.dart';
+import 'package:linkify/linkify.dart';
+import 'package:html/parser.dart' as html_parser;
 
 class DetailScreen extends ConsumerStatefulWidget {
   final int animalId;
@@ -29,7 +33,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
     Widget body;
     if (animalAsync.isLoading) {
-      body = const Center(child: CircularProgressIndicator());
+      body = const Center(child: CircularProgressIndicator(strokeCap: StrokeCap.round));
     } else if (animalAsync.hasError) {
       body = Center(child: Text('Error: \\${animalAsync.error}'));
     } else {
@@ -48,12 +52,19 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
               AspectRatio(
                 aspectRatio: 1,
                 child: mainImage != null
-                    ? Image.network(
-                        mainImage,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          color: Colors.grey[300],
-                          child: const Icon(Icons.pets, size: 48, color: Colors.grey),
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedNetworkImage(
+                          imageUrl: mainImage,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(child: CircularProgressIndicator(strokeWidth: 2, strokeCap: StrokeCap.round)),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.pets, size: 48, color: Colors.grey),
+                          ),
                         ),
                       )
                     : Container(
@@ -78,7 +89,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                             border: idx == selectedImageIdx
                                 ? Border.all(color: Colors.green, width: 2)
                                 : null,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -91,7 +102,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                                 width: 60,
                                 height: 60,
                                 color: Colors.grey[200],
-                                child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                                child: const Center(child: CircularProgressIndicator(strokeWidth: 2, strokeCap: StrokeCap.round)),
                               ),
                               errorWidget: (context, url, error) => Container(
                                 width: 60,
@@ -112,10 +123,10 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  InfoChip(label: '성별', child: GenderChip(animal.ANIMAL_SEX)),
                   InfoChip(label: '이름', child: DefaultChip(animal.ANIMAL_NM)),
+                  InfoChip(label: '성별', child: GenderChip(animal.ANIMAL_SEX)),
                   InfoChip(label: '입양상태', child: StatusChip(animal.ADOPT_STATUS)),
-                  InfoChip(label: '출생년도', child: DefaultChip(animal.ANIMAL_BRITH_YMD)),
+                  InfoChip(label: '나이', child: AgeChip(animal.ANIMAL_BRITH_YMD)),
                   InfoChip(label: '종', child: AnimalTypeChip(animal.ANIMAL_TYPE, animal.ANIMAL_BRITH_YMD)),
                   InfoChip(label: '입소날짜', child: DefaultChip(animal.ADMISSION_DT)),
                   InfoChip(label: '품종', child: BreedChip(animal.ANIMAL_BREED)),
@@ -127,20 +138,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
               const SizedBox(height: 16),
               // 소개내용
               const Text('소개내용', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Html(
-                data: animal.CONT,
-                onLinkTap: (url, attributes, element) async {
-                  final uri = Uri.parse(url!);
-                    await launchUrl(uri, mode: LaunchMode.externalApplication);
-                  
-                },
-                style: {
-                  "a": Style(
-                    color: Colors.blue,
-                    textDecoration: TextDecoration.underline,
-                  ),
-                },
-              ),
+              _HtmlToLinkifyText(animal.CONT),
               const SizedBox(height: 16),
               // 동영상
               if (animal.MOVIE_URL.isNotEmpty)
@@ -182,6 +180,47 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         ),
       ),
       body: body,
+    );
+  }
+}
+
+class _HtmlToLinkifyText extends StatelessWidget {
+  final String htmlString;
+  const _HtmlToLinkifyText(this.htmlString);
+
+  @override
+  Widget build(BuildContext context) {
+    // <p>를 줄바꿈으로, &nbsp;를 빈 문자열로 치환
+    var html = htmlString
+        .replaceAll(RegExp(r'<\s*/?\s*p\s*>', caseSensitive: false), '\n')
+        .replaceAll('&nbsp;', '');
+
+    // HTML 파싱 후 텍스트만 추출
+    final document = html_parser.parse(html);
+    var plainText = document.body?.text ?? '';
+
+    // '['로 시작하는 문장 앞에 줄바꿈이 없으면 2번 줄바꿈(\n\n)으로 치환
+    plainText = plainText.replaceAllMapped(
+      RegExp(r'([^\n]|^)(\n)?\[', multiLine: true),
+      (m) {
+        final before = m.group(1) ?? '';
+        return '$before\n\n[';
+      },
+    );
+
+    // 연속된 줄바꿈이 2개를 넘지 않도록 치환
+    plainText = plainText.replaceAll(RegExp(r'\n{3,}'), '\n\n');
+    return Linkify(
+      text: plainText,
+      onOpen: (link) async {
+        final url = Uri.parse(link.url);
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+        }
+      },
+      style: const TextStyle(fontSize: 14, color: Colors.black87),
+      linkStyle: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+      options: const LinkifyOptions(humanize: false),
     );
   }
 } 

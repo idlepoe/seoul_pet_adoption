@@ -147,33 +147,32 @@ export const getPetList = onRequest(async (req, res) => {
 export const getPetDetail = onRequest(async (req, res) => {
   try {
     const { id } = req.query;
-    
     if (!id) {
-      res.status(400).json({
-        success: false,
-        message: 'Pet ID is required'
-      });
+      res.status(400).json({ success: false, message: 'Pet ID is required' });
       return;
     }
 
-    const doc = await admin.firestore()
-      .collection('pets')
-      .doc(id.toString())
-      .get();
+    const docRef = admin.firestore().collection('pets').doc(id.toString());
+    const doc = await docRef.get();
 
     if (!doc.exists) {
-      res.status(404).json({
-        success: false,
-        message: 'Pet not found'
-      });
+      res.status(404).json({ success: false, message: 'Pet not found' });
       return;
     }
+
+    // viewCount 증가 처리
+    await docRef.update({
+      viewCount: admin.firestore.FieldValue.increment(1),
+    });
+
+    // 최신 데이터 다시 읽기 (viewCount 반영)
+    const updatedDoc = await docRef.get();
 
     res.json({
       success: true,
       data: {
-        id: doc.id,
-        ...doc.data()
+        id: updatedDoc.id,
+        ...updatedDoc.data()
       }
     });
   } catch (error) {

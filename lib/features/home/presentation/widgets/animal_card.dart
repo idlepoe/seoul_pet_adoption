@@ -45,7 +45,7 @@ class AnimalCard extends StatelessWidget {
                               width: 90,
                               height: 90,
                               color: Colors.grey[200],
-                              child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                              child: const Center(child: CircularProgressIndicator(strokeWidth: 2, strokeCap: StrokeCap.round)),
                             ),
                             errorWidget: (context, url, error) => Container(
                               width: 90,
