@@ -6,7 +6,7 @@ part of 'api_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$apiServiceHash() => r'ce72c4f572ea14a273b01086cdc8905a2e469468';
+String _$apiServiceHash() => r'd76dea2a3d4afd840c19952cd59fe889ce36151d';
 
 /// See also [apiService].
 @ProviderFor(apiService)
@@ -22,7 +22,7 @@ final apiServiceProvider = AutoDisposeProvider<ApiService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ApiServiceRef = AutoDisposeProviderRef<ApiService>;
-String _$animalsHash() => r'2922762b5e9246d5735b04846a19dff6e0c4bb56';
+String _$animalsHash() => r'a815f771c62a15566968faa5d28b815d7491c47a';
 
 /// See also [animals].
 @ProviderFor(animals)

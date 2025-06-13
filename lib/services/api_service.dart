@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/animal.dart';
 
@@ -8,16 +9,20 @@ class ApiService {
   final Dio _dio;
 
   ApiService() : _dio = Dio() {
-    _dio.options.baseUrl = 'https://api.example.com'; // 실제 API 엔드포인트로 변경 필요
+    _dio.options.baseUrl = 'https://asia-northeast3-seoul-pet-adoption.cloudfunctions.net';
     _dio.options.connectTimeout = const Duration(seconds: 5);
     _dio.options.receiveTimeout = const Duration(seconds: 3);
   }
 
   Future<List<Animal>> getAnimals() async {
     try {
-      final response = await _dio.get('/animals');
-      final List<dynamic> data = response.data['DATA'];
-      return data.map((json) => Animal.fromJson(json)).toList();
+      final response = await _dio.get('/getPetList');
+      if (response.data['success'] == true) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((json) => Animal.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load animals: ${response.data['message']}');
+      }
     } on DioException catch (e) {
       throw Exception('Failed to load animals: ${e.message}');
     }
@@ -25,8 +30,12 @@ class ApiService {
 
   Future<Animal> getAnimalDetail(int id) async {
     try {
-      final response = await _dio.get('/animals/$id');
-      return Animal.fromJson(response.data['DATA']);
+      final response = await _dio.get('/getPetDetail', queryParameters: {'id': id});
+      if (response.data['success'] == true) {
+        return Animal.fromJson(response.data['data']);
+      } else {
+        throw Exception('Failed to load animal detail: ${response.data['message']}');
+      }
     } on DioException catch (e) {
       throw Exception('Failed to load animal detail: ${e.message}');
     }
@@ -34,12 +43,12 @@ class ApiService {
 }
 
 @riverpod
-ApiService apiService(ApiServiceRef ref) {
+ApiService apiService(Ref ref) {
   return ApiService();
 }
 
 @riverpod
-Future<List<Animal>> animals(AnimalsRef ref) {
+Future<List<Animal>> animals(Ref ref) {
   return ref.watch(apiServiceProvider).getAnimals();
 }
 

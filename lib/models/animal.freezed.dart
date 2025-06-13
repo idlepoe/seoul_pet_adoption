@@ -1,4 +1,3 @@
-// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -10,391 +9,468 @@ part of 'animal.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+Animal _$AnimalFromJson(Map<String, dynamic> json) {
+  return _Animal.fromJson(json);
+}
 
 /// @nodoc
 mixin _$Animal {
-  int get seq;
-  String get animalNm;
-  String get animalSex;
-  String get animalType;
-  String get animalBreed;
-  String get adoptStatus;
-  String get fosterStatus;
-  String get weightKg;
-  String get animalBrithYmd;
-  String get admissionDt;
-  String get cont;
-  String get movieUrl;
+  String get id => throw _privateConstructorUsedError;
+  String get ANIMAL_NM => throw _privateConstructorUsedError;
+  String get ANIMAL_TYPE => throw _privateConstructorUsedError;
+  String get ANIMAL_BREED => throw _privateConstructorUsedError;
+  String get ANIMAL_SEX => throw _privateConstructorUsedError;
+  String get ANIMAL_BRITH_YMD => throw _privateConstructorUsedError;
+  String get WEIGHT_KG => throw _privateConstructorUsedError;
+  String get ADMISSION_DT => throw _privateConstructorUsedError;
+  String get ADOPT_STATUS => throw _privateConstructorUsedError;
+  String get FOSTER_STATUS => throw _privateConstructorUsedError;
+  String get IMG_URL => throw _privateConstructorUsedError;
+  String get MOVIE_URL => throw _privateConstructorUsedError;
+  String get CONT => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _timestampToDateTime)
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  int get viewCount => throw _privateConstructorUsedError;
+
+  /// Serializes this Animal to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Animal
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $AnimalCopyWith<Animal> get copyWith =>
-      _$AnimalCopyWithImpl<Animal>(this as Animal, _$identity);
-
-  /// Serializes this Animal to a JSON map.
-  Map<String, dynamic> toJson();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Animal &&
-            (identical(other.seq, seq) || other.seq == seq) &&
-            (identical(other.animalNm, animalNm) ||
-                other.animalNm == animalNm) &&
-            (identical(other.animalSex, animalSex) ||
-                other.animalSex == animalSex) &&
-            (identical(other.animalType, animalType) ||
-                other.animalType == animalType) &&
-            (identical(other.animalBreed, animalBreed) ||
-                other.animalBreed == animalBreed) &&
-            (identical(other.adoptStatus, adoptStatus) ||
-                other.adoptStatus == adoptStatus) &&
-            (identical(other.fosterStatus, fosterStatus) ||
-                other.fosterStatus == fosterStatus) &&
-            (identical(other.weightKg, weightKg) ||
-                other.weightKg == weightKg) &&
-            (identical(other.animalBrithYmd, animalBrithYmd) ||
-                other.animalBrithYmd == animalBrithYmd) &&
-            (identical(other.admissionDt, admissionDt) ||
-                other.admissionDt == admissionDt) &&
-            (identical(other.cont, cont) || other.cont == cont) &&
-            (identical(other.movieUrl, movieUrl) ||
-                other.movieUrl == movieUrl));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      seq,
-      animalNm,
-      animalSex,
-      animalType,
-      animalBreed,
-      adoptStatus,
-      fosterStatus,
-      weightKg,
-      animalBrithYmd,
-      admissionDt,
-      cont,
-      movieUrl);
-
-  @override
-  String toString() {
-    return 'Animal(seq: $seq, animalNm: $animalNm, animalSex: $animalSex, animalType: $animalType, animalBreed: $animalBreed, adoptStatus: $adoptStatus, fosterStatus: $fosterStatus, weightKg: $weightKg, animalBrithYmd: $animalBrithYmd, admissionDt: $admissionDt, cont: $cont, movieUrl: $movieUrl)';
-  }
+  $AnimalCopyWith<Animal> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $AnimalCopyWith<$Res> {
-  factory $AnimalCopyWith(Animal value, $Res Function(Animal) _then) =
-      _$AnimalCopyWithImpl;
+abstract class $AnimalCopyWith<$Res> {
+  factory $AnimalCopyWith(Animal value, $Res Function(Animal) then) =
+      _$AnimalCopyWithImpl<$Res, Animal>;
   @useResult
   $Res call(
-      {int seq,
-      String animalNm,
-      String animalSex,
-      String animalType,
-      String animalBreed,
-      String adoptStatus,
-      String fosterStatus,
-      String weightKg,
-      String animalBrithYmd,
-      String admissionDt,
-      String cont,
-      String movieUrl});
+      {String id,
+      String ANIMAL_NM,
+      String ANIMAL_TYPE,
+      String ANIMAL_BREED,
+      String ANIMAL_SEX,
+      String ANIMAL_BRITH_YMD,
+      String WEIGHT_KG,
+      String ADMISSION_DT,
+      String ADOPT_STATUS,
+      String FOSTER_STATUS,
+      String IMG_URL,
+      String MOVIE_URL,
+      String CONT,
+      @JsonKey(fromJson: _timestampToDateTime) DateTime? updatedAt,
+      int viewCount});
 }
 
 /// @nodoc
-class _$AnimalCopyWithImpl<$Res> implements $AnimalCopyWith<$Res> {
-  _$AnimalCopyWithImpl(this._self, this._then);
+class _$AnimalCopyWithImpl<$Res, $Val extends Animal>
+    implements $AnimalCopyWith<$Res> {
+  _$AnimalCopyWithImpl(this._value, this._then);
 
-  final Animal _self;
-  final $Res Function(Animal) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
   /// Create a copy of Animal
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? seq = null,
-    Object? animalNm = null,
-    Object? animalSex = null,
-    Object? animalType = null,
-    Object? animalBreed = null,
-    Object? adoptStatus = null,
-    Object? fosterStatus = null,
-    Object? weightKg = null,
-    Object? animalBrithYmd = null,
-    Object? admissionDt = null,
-    Object? cont = null,
-    Object? movieUrl = null,
+    Object? id = null,
+    Object? ANIMAL_NM = null,
+    Object? ANIMAL_TYPE = null,
+    Object? ANIMAL_BREED = null,
+    Object? ANIMAL_SEX = null,
+    Object? ANIMAL_BRITH_YMD = null,
+    Object? WEIGHT_KG = null,
+    Object? ADMISSION_DT = null,
+    Object? ADOPT_STATUS = null,
+    Object? FOSTER_STATUS = null,
+    Object? IMG_URL = null,
+    Object? MOVIE_URL = null,
+    Object? CONT = null,
+    Object? updatedAt = freezed,
+    Object? viewCount = null,
   }) {
-    return _then(_self.copyWith(
-      seq: null == seq
-          ? _self.seq
-          : seq // ignore: cast_nullable_to_non_nullable
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      ANIMAL_NM: null == ANIMAL_NM
+          ? _value.ANIMAL_NM
+          : ANIMAL_NM // ignore: cast_nullable_to_non_nullable
+              as String,
+      ANIMAL_TYPE: null == ANIMAL_TYPE
+          ? _value.ANIMAL_TYPE
+          : ANIMAL_TYPE // ignore: cast_nullable_to_non_nullable
+              as String,
+      ANIMAL_BREED: null == ANIMAL_BREED
+          ? _value.ANIMAL_BREED
+          : ANIMAL_BREED // ignore: cast_nullable_to_non_nullable
+              as String,
+      ANIMAL_SEX: null == ANIMAL_SEX
+          ? _value.ANIMAL_SEX
+          : ANIMAL_SEX // ignore: cast_nullable_to_non_nullable
+              as String,
+      ANIMAL_BRITH_YMD: null == ANIMAL_BRITH_YMD
+          ? _value.ANIMAL_BRITH_YMD
+          : ANIMAL_BRITH_YMD // ignore: cast_nullable_to_non_nullable
+              as String,
+      WEIGHT_KG: null == WEIGHT_KG
+          ? _value.WEIGHT_KG
+          : WEIGHT_KG // ignore: cast_nullable_to_non_nullable
+              as String,
+      ADMISSION_DT: null == ADMISSION_DT
+          ? _value.ADMISSION_DT
+          : ADMISSION_DT // ignore: cast_nullable_to_non_nullable
+              as String,
+      ADOPT_STATUS: null == ADOPT_STATUS
+          ? _value.ADOPT_STATUS
+          : ADOPT_STATUS // ignore: cast_nullable_to_non_nullable
+              as String,
+      FOSTER_STATUS: null == FOSTER_STATUS
+          ? _value.FOSTER_STATUS
+          : FOSTER_STATUS // ignore: cast_nullable_to_non_nullable
+              as String,
+      IMG_URL: null == IMG_URL
+          ? _value.IMG_URL
+          : IMG_URL // ignore: cast_nullable_to_non_nullable
+              as String,
+      MOVIE_URL: null == MOVIE_URL
+          ? _value.MOVIE_URL
+          : MOVIE_URL // ignore: cast_nullable_to_non_nullable
+              as String,
+      CONT: null == CONT
+          ? _value.CONT
+          : CONT // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
               as int,
-      animalNm: null == animalNm
-          ? _self.animalNm
-          : animalNm // ignore: cast_nullable_to_non_nullable
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AnimalImplCopyWith<$Res> implements $AnimalCopyWith<$Res> {
+  factory _$$AnimalImplCopyWith(
+          _$AnimalImpl value, $Res Function(_$AnimalImpl) then) =
+      __$$AnimalImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String ANIMAL_NM,
+      String ANIMAL_TYPE,
+      String ANIMAL_BREED,
+      String ANIMAL_SEX,
+      String ANIMAL_BRITH_YMD,
+      String WEIGHT_KG,
+      String ADMISSION_DT,
+      String ADOPT_STATUS,
+      String FOSTER_STATUS,
+      String IMG_URL,
+      String MOVIE_URL,
+      String CONT,
+      @JsonKey(fromJson: _timestampToDateTime) DateTime? updatedAt,
+      int viewCount});
+}
+
+/// @nodoc
+class __$$AnimalImplCopyWithImpl<$Res>
+    extends _$AnimalCopyWithImpl<$Res, _$AnimalImpl>
+    implements _$$AnimalImplCopyWith<$Res> {
+  __$$AnimalImplCopyWithImpl(
+      _$AnimalImpl _value, $Res Function(_$AnimalImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Animal
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? ANIMAL_NM = null,
+    Object? ANIMAL_TYPE = null,
+    Object? ANIMAL_BREED = null,
+    Object? ANIMAL_SEX = null,
+    Object? ANIMAL_BRITH_YMD = null,
+    Object? WEIGHT_KG = null,
+    Object? ADMISSION_DT = null,
+    Object? ADOPT_STATUS = null,
+    Object? FOSTER_STATUS = null,
+    Object? IMG_URL = null,
+    Object? MOVIE_URL = null,
+    Object? CONT = null,
+    Object? updatedAt = freezed,
+    Object? viewCount = null,
+  }) {
+    return _then(_$AnimalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      animalSex: null == animalSex
-          ? _self.animalSex
-          : animalSex // ignore: cast_nullable_to_non_nullable
+      ANIMAL_NM: null == ANIMAL_NM
+          ? _value.ANIMAL_NM
+          : ANIMAL_NM // ignore: cast_nullable_to_non_nullable
               as String,
-      animalType: null == animalType
-          ? _self.animalType
-          : animalType // ignore: cast_nullable_to_non_nullable
+      ANIMAL_TYPE: null == ANIMAL_TYPE
+          ? _value.ANIMAL_TYPE
+          : ANIMAL_TYPE // ignore: cast_nullable_to_non_nullable
               as String,
-      animalBreed: null == animalBreed
-          ? _self.animalBreed
-          : animalBreed // ignore: cast_nullable_to_non_nullable
+      ANIMAL_BREED: null == ANIMAL_BREED
+          ? _value.ANIMAL_BREED
+          : ANIMAL_BREED // ignore: cast_nullable_to_non_nullable
               as String,
-      adoptStatus: null == adoptStatus
-          ? _self.adoptStatus
-          : adoptStatus // ignore: cast_nullable_to_non_nullable
+      ANIMAL_SEX: null == ANIMAL_SEX
+          ? _value.ANIMAL_SEX
+          : ANIMAL_SEX // ignore: cast_nullable_to_non_nullable
               as String,
-      fosterStatus: null == fosterStatus
-          ? _self.fosterStatus
-          : fosterStatus // ignore: cast_nullable_to_non_nullable
+      ANIMAL_BRITH_YMD: null == ANIMAL_BRITH_YMD
+          ? _value.ANIMAL_BRITH_YMD
+          : ANIMAL_BRITH_YMD // ignore: cast_nullable_to_non_nullable
               as String,
-      weightKg: null == weightKg
-          ? _self.weightKg
-          : weightKg // ignore: cast_nullable_to_non_nullable
+      WEIGHT_KG: null == WEIGHT_KG
+          ? _value.WEIGHT_KG
+          : WEIGHT_KG // ignore: cast_nullable_to_non_nullable
               as String,
-      animalBrithYmd: null == animalBrithYmd
-          ? _self.animalBrithYmd
-          : animalBrithYmd // ignore: cast_nullable_to_non_nullable
+      ADMISSION_DT: null == ADMISSION_DT
+          ? _value.ADMISSION_DT
+          : ADMISSION_DT // ignore: cast_nullable_to_non_nullable
               as String,
-      admissionDt: null == admissionDt
-          ? _self.admissionDt
-          : admissionDt // ignore: cast_nullable_to_non_nullable
+      ADOPT_STATUS: null == ADOPT_STATUS
+          ? _value.ADOPT_STATUS
+          : ADOPT_STATUS // ignore: cast_nullable_to_non_nullable
               as String,
-      cont: null == cont
-          ? _self.cont
-          : cont // ignore: cast_nullable_to_non_nullable
+      FOSTER_STATUS: null == FOSTER_STATUS
+          ? _value.FOSTER_STATUS
+          : FOSTER_STATUS // ignore: cast_nullable_to_non_nullable
               as String,
-      movieUrl: null == movieUrl
-          ? _self.movieUrl
-          : movieUrl // ignore: cast_nullable_to_non_nullable
+      IMG_URL: null == IMG_URL
+          ? _value.IMG_URL
+          : IMG_URL // ignore: cast_nullable_to_non_nullable
               as String,
+      MOVIE_URL: null == MOVIE_URL
+          ? _value.MOVIE_URL
+          : MOVIE_URL // ignore: cast_nullable_to_non_nullable
+              as String,
+      CONT: null == CONT
+          ? _value.CONT
+          : CONT // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      viewCount: null == viewCount
+          ? _value.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _Animal implements Animal {
-  const _Animal(
-      {required this.seq,
-      required this.animalNm,
-      required this.animalSex,
-      required this.animalType,
-      required this.animalBreed,
-      required this.adoptStatus,
-      required this.fosterStatus,
-      required this.weightKg,
-      required this.animalBrithYmd,
-      required this.admissionDt,
-      required this.cont,
-      required this.movieUrl});
-  factory _Animal.fromJson(Map<String, dynamic> json) => _$AnimalFromJson(json);
+class _$AnimalImpl implements _Animal {
+  const _$AnimalImpl(
+      {required this.id,
+      required this.ANIMAL_NM,
+      required this.ANIMAL_TYPE,
+      required this.ANIMAL_BREED,
+      required this.ANIMAL_SEX,
+      required this.ANIMAL_BRITH_YMD,
+      required this.WEIGHT_KG,
+      required this.ADMISSION_DT,
+      required this.ADOPT_STATUS,
+      required this.FOSTER_STATUS,
+      required this.IMG_URL,
+      required this.MOVIE_URL,
+      required this.CONT,
+      @JsonKey(fromJson: _timestampToDateTime) this.updatedAt,
+      this.viewCount = 0});
+
+  factory _$AnimalImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnimalImplFromJson(json);
 
   @override
-  final int seq;
+  final String id;
   @override
-  final String animalNm;
+  final String ANIMAL_NM;
   @override
-  final String animalSex;
+  final String ANIMAL_TYPE;
   @override
-  final String animalType;
+  final String ANIMAL_BREED;
   @override
-  final String animalBreed;
+  final String ANIMAL_SEX;
   @override
-  final String adoptStatus;
+  final String ANIMAL_BRITH_YMD;
   @override
-  final String fosterStatus;
+  final String WEIGHT_KG;
   @override
-  final String weightKg;
+  final String ADMISSION_DT;
   @override
-  final String animalBrithYmd;
+  final String ADOPT_STATUS;
   @override
-  final String admissionDt;
+  final String FOSTER_STATUS;
   @override
-  final String cont;
+  final String IMG_URL;
   @override
-  final String movieUrl;
+  final String MOVIE_URL;
+  @override
+  final String CONT;
+  @override
+  @JsonKey(fromJson: _timestampToDateTime)
+  final DateTime? updatedAt;
+  @override
+  @JsonKey()
+  final int viewCount;
 
-  /// Create a copy of Animal
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$AnimalCopyWith<_Animal> get copyWith =>
-      __$AnimalCopyWithImpl<_Animal>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$AnimalToJson(
-      this,
-    );
+  String toString() {
+    return 'Animal(id: $id, ANIMAL_NM: $ANIMAL_NM, ANIMAL_TYPE: $ANIMAL_TYPE, ANIMAL_BREED: $ANIMAL_BREED, ANIMAL_SEX: $ANIMAL_SEX, ANIMAL_BRITH_YMD: $ANIMAL_BRITH_YMD, WEIGHT_KG: $WEIGHT_KG, ADMISSION_DT: $ADMISSION_DT, ADOPT_STATUS: $ADOPT_STATUS, FOSTER_STATUS: $FOSTER_STATUS, IMG_URL: $IMG_URL, MOVIE_URL: $MOVIE_URL, CONT: $CONT, updatedAt: $updatedAt, viewCount: $viewCount)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Animal &&
-            (identical(other.seq, seq) || other.seq == seq) &&
-            (identical(other.animalNm, animalNm) ||
-                other.animalNm == animalNm) &&
-            (identical(other.animalSex, animalSex) ||
-                other.animalSex == animalSex) &&
-            (identical(other.animalType, animalType) ||
-                other.animalType == animalType) &&
-            (identical(other.animalBreed, animalBreed) ||
-                other.animalBreed == animalBreed) &&
-            (identical(other.adoptStatus, adoptStatus) ||
-                other.adoptStatus == adoptStatus) &&
-            (identical(other.fosterStatus, fosterStatus) ||
-                other.fosterStatus == fosterStatus) &&
-            (identical(other.weightKg, weightKg) ||
-                other.weightKg == weightKg) &&
-            (identical(other.animalBrithYmd, animalBrithYmd) ||
-                other.animalBrithYmd == animalBrithYmd) &&
-            (identical(other.admissionDt, admissionDt) ||
-                other.admissionDt == admissionDt) &&
-            (identical(other.cont, cont) || other.cont == cont) &&
-            (identical(other.movieUrl, movieUrl) ||
-                other.movieUrl == movieUrl));
+            other is _$AnimalImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.ANIMAL_NM, ANIMAL_NM) ||
+                other.ANIMAL_NM == ANIMAL_NM) &&
+            (identical(other.ANIMAL_TYPE, ANIMAL_TYPE) ||
+                other.ANIMAL_TYPE == ANIMAL_TYPE) &&
+            (identical(other.ANIMAL_BREED, ANIMAL_BREED) ||
+                other.ANIMAL_BREED == ANIMAL_BREED) &&
+            (identical(other.ANIMAL_SEX, ANIMAL_SEX) ||
+                other.ANIMAL_SEX == ANIMAL_SEX) &&
+            (identical(other.ANIMAL_BRITH_YMD, ANIMAL_BRITH_YMD) ||
+                other.ANIMAL_BRITH_YMD == ANIMAL_BRITH_YMD) &&
+            (identical(other.WEIGHT_KG, WEIGHT_KG) ||
+                other.WEIGHT_KG == WEIGHT_KG) &&
+            (identical(other.ADMISSION_DT, ADMISSION_DT) ||
+                other.ADMISSION_DT == ADMISSION_DT) &&
+            (identical(other.ADOPT_STATUS, ADOPT_STATUS) ||
+                other.ADOPT_STATUS == ADOPT_STATUS) &&
+            (identical(other.FOSTER_STATUS, FOSTER_STATUS) ||
+                other.FOSTER_STATUS == FOSTER_STATUS) &&
+            (identical(other.IMG_URL, IMG_URL) || other.IMG_URL == IMG_URL) &&
+            (identical(other.MOVIE_URL, MOVIE_URL) ||
+                other.MOVIE_URL == MOVIE_URL) &&
+            (identical(other.CONT, CONT) || other.CONT == CONT) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.viewCount, viewCount) ||
+                other.viewCount == viewCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      seq,
-      animalNm,
-      animalSex,
-      animalType,
-      animalBreed,
-      adoptStatus,
-      fosterStatus,
-      weightKg,
-      animalBrithYmd,
-      admissionDt,
-      cont,
-      movieUrl);
+      id,
+      ANIMAL_NM,
+      ANIMAL_TYPE,
+      ANIMAL_BREED,
+      ANIMAL_SEX,
+      ANIMAL_BRITH_YMD,
+      WEIGHT_KG,
+      ADMISSION_DT,
+      ADOPT_STATUS,
+      FOSTER_STATUS,
+      IMG_URL,
+      MOVIE_URL,
+      CONT,
+      updatedAt,
+      viewCount);
+
+  /// Create a copy of Animal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AnimalImplCopyWith<_$AnimalImpl> get copyWith =>
+      __$$AnimalImplCopyWithImpl<_$AnimalImpl>(this, _$identity);
 
   @override
-  String toString() {
-    return 'Animal(seq: $seq, animalNm: $animalNm, animalSex: $animalSex, animalType: $animalType, animalBreed: $animalBreed, adoptStatus: $adoptStatus, fosterStatus: $fosterStatus, weightKg: $weightKg, animalBrithYmd: $animalBrithYmd, admissionDt: $admissionDt, cont: $cont, movieUrl: $movieUrl)';
+  Map<String, dynamic> toJson() {
+    return _$$AnimalImplToJson(
+      this,
+    );
   }
 }
 
-/// @nodoc
-abstract mixin class _$AnimalCopyWith<$Res> implements $AnimalCopyWith<$Res> {
-  factory _$AnimalCopyWith(_Animal value, $Res Function(_Animal) _then) =
-      __$AnimalCopyWithImpl;
+abstract class _Animal implements Animal {
+  const factory _Animal(
+      {required final String id,
+      required final String ANIMAL_NM,
+      required final String ANIMAL_TYPE,
+      required final String ANIMAL_BREED,
+      required final String ANIMAL_SEX,
+      required final String ANIMAL_BRITH_YMD,
+      required final String WEIGHT_KG,
+      required final String ADMISSION_DT,
+      required final String ADOPT_STATUS,
+      required final String FOSTER_STATUS,
+      required final String IMG_URL,
+      required final String MOVIE_URL,
+      required final String CONT,
+      @JsonKey(fromJson: _timestampToDateTime) final DateTime? updatedAt,
+      final int viewCount}) = _$AnimalImpl;
+
+  factory _Animal.fromJson(Map<String, dynamic> json) = _$AnimalImpl.fromJson;
+
   @override
-  @useResult
-  $Res call(
-      {int seq,
-      String animalNm,
-      String animalSex,
-      String animalType,
-      String animalBreed,
-      String adoptStatus,
-      String fosterStatus,
-      String weightKg,
-      String animalBrithYmd,
-      String admissionDt,
-      String cont,
-      String movieUrl});
-}
-
-/// @nodoc
-class __$AnimalCopyWithImpl<$Res> implements _$AnimalCopyWith<$Res> {
-  __$AnimalCopyWithImpl(this._self, this._then);
-
-  final _Animal _self;
-  final $Res Function(_Animal) _then;
+  String get id;
+  @override
+  String get ANIMAL_NM;
+  @override
+  String get ANIMAL_TYPE;
+  @override
+  String get ANIMAL_BREED;
+  @override
+  String get ANIMAL_SEX;
+  @override
+  String get ANIMAL_BRITH_YMD;
+  @override
+  String get WEIGHT_KG;
+  @override
+  String get ADMISSION_DT;
+  @override
+  String get ADOPT_STATUS;
+  @override
+  String get FOSTER_STATUS;
+  @override
+  String get IMG_URL;
+  @override
+  String get MOVIE_URL;
+  @override
+  String get CONT;
+  @override
+  @JsonKey(fromJson: _timestampToDateTime)
+  DateTime? get updatedAt;
+  @override
+  int get viewCount;
 
   /// Create a copy of Animal
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? seq = null,
-    Object? animalNm = null,
-    Object? animalSex = null,
-    Object? animalType = null,
-    Object? animalBreed = null,
-    Object? adoptStatus = null,
-    Object? fosterStatus = null,
-    Object? weightKg = null,
-    Object? animalBrithYmd = null,
-    Object? admissionDt = null,
-    Object? cont = null,
-    Object? movieUrl = null,
-  }) {
-    return _then(_Animal(
-      seq: null == seq
-          ? _self.seq
-          : seq // ignore: cast_nullable_to_non_nullable
-              as int,
-      animalNm: null == animalNm
-          ? _self.animalNm
-          : animalNm // ignore: cast_nullable_to_non_nullable
-              as String,
-      animalSex: null == animalSex
-          ? _self.animalSex
-          : animalSex // ignore: cast_nullable_to_non_nullable
-              as String,
-      animalType: null == animalType
-          ? _self.animalType
-          : animalType // ignore: cast_nullable_to_non_nullable
-              as String,
-      animalBreed: null == animalBreed
-          ? _self.animalBreed
-          : animalBreed // ignore: cast_nullable_to_non_nullable
-              as String,
-      adoptStatus: null == adoptStatus
-          ? _self.adoptStatus
-          : adoptStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      fosterStatus: null == fosterStatus
-          ? _self.fosterStatus
-          : fosterStatus // ignore: cast_nullable_to_non_nullable
-              as String,
-      weightKg: null == weightKg
-          ? _self.weightKg
-          : weightKg // ignore: cast_nullable_to_non_nullable
-              as String,
-      animalBrithYmd: null == animalBrithYmd
-          ? _self.animalBrithYmd
-          : animalBrithYmd // ignore: cast_nullable_to_non_nullable
-              as String,
-      admissionDt: null == admissionDt
-          ? _self.admissionDt
-          : admissionDt // ignore: cast_nullable_to_non_nullable
-              as String,
-      cont: null == cont
-          ? _self.cont
-          : cont // ignore: cast_nullable_to_non_nullable
-              as String,
-      movieUrl: null == movieUrl
-          ? _self.movieUrl
-          : movieUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AnimalImplCopyWith<_$AnimalImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-// dart format on
