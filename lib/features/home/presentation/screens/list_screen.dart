@@ -8,13 +8,18 @@ final recent3MonthsFilterProvider = StateProvider<bool>((ref) => false);
 final adoptStatusFilterProvider = StateProvider<bool>((ref) => false);
 final fosterStatusFilterProvider = StateProvider<bool>((ref) => false);
 
+enum AnimalSortType { age, admission, viewCount }
+
+final animalSortTypeProvider = StateProvider<AnimalSortType>((ref) => AnimalSortType.admission);
+
 final filteredAnimalsProvider = FutureProvider((ref) async {
   final animals = await ref.watch(animalsProvider.future);
   final recent3 = ref.watch(recent3MonthsFilterProvider);
   final adopt = ref.watch(adoptStatusFilterProvider);
   final foster = ref.watch(fosterStatusFilterProvider);
+  final sortType = ref.watch(animalSortTypeProvider);
   DateTime now = DateTime.now();
-  return animals.where((a) {
+  var filtered = animals.where((a) {
     bool ok = true;
     if (recent3) {
       final cleaned = a.ADMISSION_DT.replaceAll(RegExp(r'[^0-9]'), '');
@@ -34,7 +39,38 @@ final filteredAnimalsProvider = FutureProvider((ref) async {
     }
     return ok;
   }).toList();
+
+  // 정렬
+  switch (sortType) {
+    case AnimalSortType.age:
+      filtered.sort((a, b) => _calculateAgeDouble(a.ANIMAL_BRITH_YMD).compareTo(_calculateAgeDouble(b.ANIMAL_BRITH_YMD)));
+      break;
+    case AnimalSortType.admission:
+      filtered.sort((a, b) => b.ADMISSION_DT.compareTo(a.ADMISSION_DT));
+      break;
+    case AnimalSortType.viewCount:
+      filtered.sort((a, b) => b.viewCount.compareTo(a.viewCount));
+      break;
+  }
+  return filtered;
 });
+
+double _calculateAgeDouble(String birthYmd) {
+  try {
+    final now = DateTime.now();
+    final cleaned = birthYmd.replaceAll(RegExp(r'[^0-9]'), '');
+    if (cleaned.length < 4) return 0;
+    final year = int.parse(cleaned.substring(0, 4));
+    final month = cleaned.length >= 6 ? int.parse(cleaned.substring(4, 6)) : 1;
+    final day = cleaned.length >= 8 ? int.parse(cleaned.substring(6, 8)) : 1;
+    final birth = DateTime(year, month, day);
+    final diff = now.difference(birth);
+    final age = diff.inDays / 365.25;
+    return age;
+  } catch (_) {
+    return 0;
+  }
+}
 
 class ListScreen extends ConsumerWidget {
   const ListScreen({super.key});
@@ -45,36 +81,70 @@ class ListScreen extends ConsumerWidget {
     final recent3 = ref.watch(recent3MonthsFilterProvider);
     final adopt = ref.watch(adoptStatusFilterProvider);
     final foster = ref.watch(fosterStatusFilterProvider);
+    final sortType = ref.watch(animalSortTypeProvider);
 
     return Column(
       children: [
         SizedBox(
           height: 48,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _FilterChip(
-                  label: '최근 3개월',
-                  selected: recent3,
-                  onTap: () => ref.read(recent3MonthsFilterProvider.notifier).state = !recent3,
+          child: Row(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _FilterChip(
+                            label: '최근 3개월',
+                            selected: recent3,
+                            onTap: () => ref.read(recent3MonthsFilterProvider.notifier).state = !recent3,
+                          ),
+                          const SizedBox(width: 8),
+                          _FilterChip(
+                            label: '입양문의가능',
+                            selected: adopt,
+                            onTap: () => ref.read(adoptStatusFilterProvider.notifier).state = !adopt,
+                          ),
+                          const SizedBox(width: 8),
+                          _FilterChip(
+                            label: '임시보호가능',
+                            selected: foster,
+                            onTap: () => ref.read(fosterStatusFilterProvider.notifier).state = !foster,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Gradient 오버레이
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: IgnorePointer(
+                        child: Container(
+                          width: 32,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0),
+                                Theme.of(context).scaffoldBackgroundColor,
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                _FilterChip(
-                  label: '입양문의가능',
-                  selected: adopt,
-                  onTap: () => ref.read(adoptStatusFilterProvider.notifier).state = !adopt,
-                ),
-                const SizedBox(width: 8),
-                _FilterChip(
-                  label: '임시보호가능',
-                  selected: foster,
-                  onTap: () => ref.read(fosterStatusFilterProvider.notifier).state = !foster,
-                ),
-              ],
-            ),
+              ),
+              _SortDropdown(sortType: sortType, onChanged: (val) => ref.read(animalSortTypeProvider.notifier).state = val),
+              const SizedBox(width: 8),
+            ],
           ),
         ),
         Expanded(
@@ -145,6 +215,39 @@ class _FilterChip extends StatelessWidget {
                 ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SortDropdown extends StatelessWidget {
+  final AnimalSortType sortType;
+  final ValueChanged<AnimalSortType> onChanged;
+  const _SortDropdown({required this.sortType, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<AnimalSortType>(
+        icon: const Icon(Icons.sort, size: 28),
+        value: sortType,
+        onChanged: (val) {
+          if (val != null) onChanged(val);
+        },
+        items: const [
+          DropdownMenuItem(
+            value: AnimalSortType.age,
+            child: Text('나이순'),
+          ),
+          DropdownMenuItem(
+            value: AnimalSortType.admission,
+            child: Text('등록일순'),
+          ),
+          DropdownMenuItem(
+            value: AnimalSortType.viewCount,
+            child: Text('관심도순'),
+          ),
         ],
       ),
     );

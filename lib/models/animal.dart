@@ -25,7 +25,7 @@ class Animal with _$Animal {
     required String ADMISSION_DT,
     required String ADOPT_STATUS,
     required String FOSTER_STATUS,
-    required String IMG_URL,
+    required List<String> IMG_URLS,
     required String MOVIE_URL,
     required String CONT,
     @JsonKey(fromJson: _timestampToDateTime) DateTime? updatedAt,

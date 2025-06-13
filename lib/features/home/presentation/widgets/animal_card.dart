@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seoul_pet_adoption/models/animal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:seoul_pet_adoption/features/home/presentation/widgets/chips.dart';
 
 class AnimalCard extends StatelessWidget {
   final Animal animal;
@@ -34,27 +35,34 @@ class AnimalCard extends StatelessWidget {
                     children: [
                       ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: animal.IMG_URL,
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        width: 90,
-                        height: 90,
-                        color: Colors.grey[200],
-                        child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        width: 90,
-                        height: 90,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.pets, size: 40, color: Colors.grey),
-                      ),
-                    ),
+                    child: animal.IMG_URLS.isNotEmpty
+                        ? CachedNetworkImage(
+                            imageUrl: animal.IMG_URLS.first,
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Container(
+                              width: 90,
+                              height: 90,
+                              color: Colors.grey[200],
+                              child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              width: 90,
+                              height: 90,
+                              color: Colors.grey[300],
+                              child: const Icon(Icons.pets, size: 40, color: Colors.grey),
+                            ),
+                          )
+                        : Container(
+                            width: 90,
+                            height: 90,
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.pets, size: 40, color: Colors.grey),
+                          ),
                   ),
                   const SizedBox(height: 12),
-                      _StatusChip(animal.ADOPT_STATUS, color: Colors.green[100], textColor: Colors.green[800]),
+                      StatusChip(animal.ADOPT_STATUS, color: Colors.green[100], textColor: Colors.green[800]),
                     ],
                   ),
                   const SizedBox(width: 12),
@@ -67,30 +75,30 @@ class AnimalCard extends StatelessWidget {
                         Row(
                           children: [
                             const Text('품종: ', style: TextStyle(fontSize: 13)),
-                            _AnimalTypeChip(animal.ANIMAL_TYPE, animal.ANIMAL_BRITH_YMD),
+                            AnimalTypeChip(animal.ANIMAL_TYPE, animal.ANIMAL_BRITH_YMD),
                             const SizedBox(width: 4),
-                            _BreedChip(animal.ANIMAL_BREED),
+                            BreedChip(animal.ANIMAL_BREED),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Row(
                           children: [
                             const Text('성별: ', style: TextStyle(fontSize: 13)),
-                            _GenderChip(animal.ANIMAL_SEX),
+                            GenderChip(animal.ANIMAL_SEX),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Row(
                           children: [
                             const Text('나이: ', style: TextStyle(fontSize: 13)),
-                            _AgeChip(animal.ANIMAL_BRITH_YMD),
+                            AgeChip(animal.ANIMAL_BRITH_YMD),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Row(
                           children: [
                             const Text('체중: ', style: TextStyle(fontSize: 13)),
-                            _WeightChip(animal.WEIGHT_KG),
+                            WeightChip(animal.WEIGHT_KG),
                           ],
                         ),                      ],
                     ),
@@ -148,11 +156,11 @@ class AnimalCard extends StatelessWidget {
   }
 }
 
-class _StatusChip extends StatelessWidget {
+class StatusChip extends StatelessWidget {
   final String label;
   final Color? color;
   final Color? textColor;
-  const _StatusChip(this.label, {this.color, this.textColor});
+  const StatusChip(this.label, {this.color, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -183,9 +191,9 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
-class _GenderChip extends StatelessWidget {
+class GenderChip extends StatelessWidget {
   final String sex;
-  const _GenderChip(this.sex);
+  const GenderChip(this.sex);
 
   @override
   Widget build(BuildContext context) {
@@ -225,10 +233,10 @@ class _GenderChip extends StatelessWidget {
   }
 }
 
-class _AnimalTypeChip extends StatelessWidget {
+class AnimalTypeChip extends StatelessWidget {
   final String type;
   final String birthYmd;
-  const _AnimalTypeChip(this.type, this.birthYmd);
+  const AnimalTypeChip(this.type, this.birthYmd);
 
   @override
   Widget build(BuildContext context) {
@@ -273,9 +281,9 @@ double _calculateAgeDouble(String birthYmd) {
   }
 }
 
-class _BreedChip extends StatelessWidget {
+class BreedChip extends StatelessWidget {
   final String breed;
-  const _BreedChip(this.breed);
+  const BreedChip(this.breed);
 
   @override
   Widget build(BuildContext context) {
@@ -293,9 +301,9 @@ class _BreedChip extends StatelessWidget {
   }
 }
 
-class _AgeChip extends StatelessWidget {
+class AgeChip extends StatelessWidget {
   final String birthYmd;
-  const _AgeChip(this.birthYmd);
+  const AgeChip(this.birthYmd);
 
   @override
   Widget build(BuildContext context) {
@@ -315,9 +323,9 @@ class _AgeChip extends StatelessWidget {
   }
 }
 
-class _WeightChip extends StatelessWidget {
+class WeightChip extends StatelessWidget {
   final String weight;
-  const _WeightChip(this.weight);
+  const WeightChip(this.weight);
 
   @override
   Widget build(BuildContext context) {

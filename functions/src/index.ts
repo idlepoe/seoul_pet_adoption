@@ -62,10 +62,14 @@ async function syncPetDataToFirestore() {
       throw new Error('No pet info data received');
     }
 
-    // 이미지 정보를 Map으로 변환하여 빠른 조회 가능하게 함
-    const imageMap = new Map(
-      petImageList.map(img => [img.SEQ, img.IMG_URL])
-    );
+    // 이미지 정보를 Map<SEQ, string[]>으로 변환하여 여러 이미지 지원
+    const imageMap = new Map<number, string[]>();
+    for (const img of petImageList) {
+      if (!imageMap.has(img.SEQ)) {
+        imageMap.set(img.SEQ, []);
+      }
+      imageMap.get(img.SEQ)!.push(img.IMG_URL);
+    }
 
     // 데이터 병합 및 Firebase에 저장
     const batch = admin.firestore().batch();
@@ -74,7 +78,7 @@ async function syncPetDataToFirestore() {
     for (const pet of petInfoList) {
       const petData = {
         ...pet,
-        IMG_URL: imageMap.get(pet.SEQ) || '',
+        IMG_URLS: imageMap.get(pet.SEQ) || [],
         updatedAt: admin.firestore.FieldValue.serverTimestamp()
       };
 

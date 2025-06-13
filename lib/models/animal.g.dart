@@ -17,7 +17,8 @@ _$AnimalImpl _$$AnimalImplFromJson(Map<String, dynamic> json) => _$AnimalImpl(
       ADMISSION_DT: json['ADMISSION_DT'] as String,
       ADOPT_STATUS: json['ADOPT_STATUS'] as String,
       FOSTER_STATUS: json['FOSTER_STATUS'] as String,
-      IMG_URL: json['IMG_URL'] as String,
+      IMG_URLS:
+          (json['IMG_URLS'] as List<dynamic>).map((e) => e as String).toList(),
       MOVIE_URL: json['MOVIE_URL'] as String,
       CONT: json['CONT'] as String,
       updatedAt: _timestampToDateTime(json['updatedAt']),
@@ -36,7 +37,7 @@ Map<String, dynamic> _$$AnimalImplToJson(_$AnimalImpl instance) =>
       'ADMISSION_DT': instance.ADMISSION_DT,
       'ADOPT_STATUS': instance.ADOPT_STATUS,
       'FOSTER_STATUS': instance.FOSTER_STATUS,
-      'IMG_URL': instance.IMG_URL,
+      'IMG_URLS': instance.IMG_URLS,
       'MOVIE_URL': instance.MOVIE_URL,
       'CONT': instance.CONT,
       'updatedAt': instance.updatedAt?.toIso8601String(),

@@ -30,7 +30,7 @@ mixin _$Animal {
   String get ADMISSION_DT => throw _privateConstructorUsedError;
   String get ADOPT_STATUS => throw _privateConstructorUsedError;
   String get FOSTER_STATUS => throw _privateConstructorUsedError;
-  String get IMG_URL => throw _privateConstructorUsedError;
+  List<String> get IMG_URLS => throw _privateConstructorUsedError;
   String get MOVIE_URL => throw _privateConstructorUsedError;
   String get CONT => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _timestampToDateTime)
@@ -62,7 +62,7 @@ abstract class $AnimalCopyWith<$Res> {
       String ADMISSION_DT,
       String ADOPT_STATUS,
       String FOSTER_STATUS,
-      String IMG_URL,
+      List<String> IMG_URLS,
       String MOVIE_URL,
       String CONT,
       @JsonKey(fromJson: _timestampToDateTime) DateTime? updatedAt,
@@ -94,7 +94,7 @@ class _$AnimalCopyWithImpl<$Res, $Val extends Animal>
     Object? ADMISSION_DT = null,
     Object? ADOPT_STATUS = null,
     Object? FOSTER_STATUS = null,
-    Object? IMG_URL = null,
+    Object? IMG_URLS = null,
     Object? MOVIE_URL = null,
     Object? CONT = null,
     Object? updatedAt = freezed,
@@ -141,10 +141,10 @@ class _$AnimalCopyWithImpl<$Res, $Val extends Animal>
           ? _value.FOSTER_STATUS
           : FOSTER_STATUS // ignore: cast_nullable_to_non_nullable
               as String,
-      IMG_URL: null == IMG_URL
-          ? _value.IMG_URL
-          : IMG_URL // ignore: cast_nullable_to_non_nullable
-              as String,
+      IMG_URLS: null == IMG_URLS
+          ? _value.IMG_URLS
+          : IMG_URLS // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       MOVIE_URL: null == MOVIE_URL
           ? _value.MOVIE_URL
           : MOVIE_URL // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ abstract class _$$AnimalImplCopyWith<$Res> implements $AnimalCopyWith<$Res> {
       String ADMISSION_DT,
       String ADOPT_STATUS,
       String FOSTER_STATUS,
-      String IMG_URL,
+      List<String> IMG_URLS,
       String MOVIE_URL,
       String CONT,
       @JsonKey(fromJson: _timestampToDateTime) DateTime? updatedAt,
@@ -213,7 +213,7 @@ class __$$AnimalImplCopyWithImpl<$Res>
     Object? ADMISSION_DT = null,
     Object? ADOPT_STATUS = null,
     Object? FOSTER_STATUS = null,
-    Object? IMG_URL = null,
+    Object? IMG_URLS = null,
     Object? MOVIE_URL = null,
     Object? CONT = null,
     Object? updatedAt = freezed,
@@ -260,10 +260,10 @@ class __$$AnimalImplCopyWithImpl<$Res>
           ? _value.FOSTER_STATUS
           : FOSTER_STATUS // ignore: cast_nullable_to_non_nullable
               as String,
-      IMG_URL: null == IMG_URL
-          ? _value.IMG_URL
-          : IMG_URL // ignore: cast_nullable_to_non_nullable
-              as String,
+      IMG_URLS: null == IMG_URLS
+          ? _value._IMG_URLS
+          : IMG_URLS // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       MOVIE_URL: null == MOVIE_URL
           ? _value.MOVIE_URL
           : MOVIE_URL // ignore: cast_nullable_to_non_nullable
@@ -298,11 +298,12 @@ class _$AnimalImpl implements _Animal {
       required this.ADMISSION_DT,
       required this.ADOPT_STATUS,
       required this.FOSTER_STATUS,
-      required this.IMG_URL,
+      required final List<String> IMG_URLS,
       required this.MOVIE_URL,
       required this.CONT,
       @JsonKey(fromJson: _timestampToDateTime) this.updatedAt,
-      this.viewCount = 0});
+      this.viewCount = 0})
+      : _IMG_URLS = IMG_URLS;
 
   factory _$AnimalImpl.fromJson(Map<String, dynamic> json) =>
       _$$AnimalImplFromJson(json);
@@ -327,8 +328,14 @@ class _$AnimalImpl implements _Animal {
   final String ADOPT_STATUS;
   @override
   final String FOSTER_STATUS;
+  final List<String> _IMG_URLS;
   @override
-  final String IMG_URL;
+  List<String> get IMG_URLS {
+    if (_IMG_URLS is EqualUnmodifiableListView) return _IMG_URLS;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_IMG_URLS);
+  }
+
   @override
   final String MOVIE_URL;
   @override
@@ -342,7 +349,7 @@ class _$AnimalImpl implements _Animal {
 
   @override
   String toString() {
-    return 'Animal(id: $id, ANIMAL_NM: $ANIMAL_NM, ANIMAL_TYPE: $ANIMAL_TYPE, ANIMAL_BREED: $ANIMAL_BREED, ANIMAL_SEX: $ANIMAL_SEX, ANIMAL_BRITH_YMD: $ANIMAL_BRITH_YMD, WEIGHT_KG: $WEIGHT_KG, ADMISSION_DT: $ADMISSION_DT, ADOPT_STATUS: $ADOPT_STATUS, FOSTER_STATUS: $FOSTER_STATUS, IMG_URL: $IMG_URL, MOVIE_URL: $MOVIE_URL, CONT: $CONT, updatedAt: $updatedAt, viewCount: $viewCount)';
+    return 'Animal(id: $id, ANIMAL_NM: $ANIMAL_NM, ANIMAL_TYPE: $ANIMAL_TYPE, ANIMAL_BREED: $ANIMAL_BREED, ANIMAL_SEX: $ANIMAL_SEX, ANIMAL_BRITH_YMD: $ANIMAL_BRITH_YMD, WEIGHT_KG: $WEIGHT_KG, ADMISSION_DT: $ADMISSION_DT, ADOPT_STATUS: $ADOPT_STATUS, FOSTER_STATUS: $FOSTER_STATUS, IMG_URLS: $IMG_URLS, MOVIE_URL: $MOVIE_URL, CONT: $CONT, updatedAt: $updatedAt, viewCount: $viewCount)';
   }
 
   @override
@@ -369,7 +376,7 @@ class _$AnimalImpl implements _Animal {
                 other.ADOPT_STATUS == ADOPT_STATUS) &&
             (identical(other.FOSTER_STATUS, FOSTER_STATUS) ||
                 other.FOSTER_STATUS == FOSTER_STATUS) &&
-            (identical(other.IMG_URL, IMG_URL) || other.IMG_URL == IMG_URL) &&
+            const DeepCollectionEquality().equals(other._IMG_URLS, _IMG_URLS) &&
             (identical(other.MOVIE_URL, MOVIE_URL) ||
                 other.MOVIE_URL == MOVIE_URL) &&
             (identical(other.CONT, CONT) || other.CONT == CONT) &&
@@ -393,7 +400,7 @@ class _$AnimalImpl implements _Animal {
       ADMISSION_DT,
       ADOPT_STATUS,
       FOSTER_STATUS,
-      IMG_URL,
+      const DeepCollectionEquality().hash(_IMG_URLS),
       MOVIE_URL,
       CONT,
       updatedAt,
@@ -427,7 +434,7 @@ abstract class _Animal implements Animal {
       required final String ADMISSION_DT,
       required final String ADOPT_STATUS,
       required final String FOSTER_STATUS,
-      required final String IMG_URL,
+      required final List<String> IMG_URLS,
       required final String MOVIE_URL,
       required final String CONT,
       @JsonKey(fromJson: _timestampToDateTime) final DateTime? updatedAt,
@@ -456,7 +463,7 @@ abstract class _Animal implements Animal {
   @override
   String get FOSTER_STATUS;
   @override
-  String get IMG_URL;
+  List<String> get IMG_URLS;
   @override
   String get MOVIE_URL;
   @override
