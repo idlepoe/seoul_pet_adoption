@@ -24,11 +24,13 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: '서울시 반려동물 입양',
+      title: '서울시 반려동물 입양정보',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        fontFamily: 'SeoulHangangB',
       ),
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
     );
   }
