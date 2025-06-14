@@ -80,7 +80,7 @@ class ListScreen extends ConsumerWidget {
   const ListScreen({super.key});
 
   static Future<void> showInfoDialog(BuildContext context) async {
-    await showDialog(
+     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('앱 안내'),
@@ -228,6 +228,7 @@ class ListScreen extends ConsumerWidget {
           Expanded(
             child: animalsAsync.when(
               data: (animals) => ListView.separated(
+                physics: BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                 itemCount: animals.length,
                 separatorBuilder: (context, index) => const SizedBox(height: 4),
