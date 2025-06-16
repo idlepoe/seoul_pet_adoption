@@ -20,13 +20,20 @@ Flutter + Firebase 기반으로 제작되었으며, 상태관리는 GetX, OTA �
 
 ---
 
-## 🛠️ 기술 스택
+## 🛠️ 주요 기술스택
 
-- **Flutter** (Dart)
-- **Firebase**
-    - Firestore
-    - 🔧 Cloud Functions
-- [GetX](https://pub.dev/packages/get) – 상태관리 및 라우팅
-- [Shorebird](https://pub.dev/packages/shorebird_code_push) – 코드 푸시 배포
-- [Dio](https://pub.dev/packages/dio) – HTTP 클라이언트
-- [Shared Preferences](https://pub.dev/packages/shared_preferences) – 로컬 데이터 저장
+### Frontend (Flutter)
+- **Flutter**: 크로스플랫폼 UI 프레임워크
+- **Dart**: Flutter 앱 개발 언어
+- **Riverpod**: 상태 관리 (flutter_riverpod, riverpod_annotation)
+- **Freezed**: 불변 데이터 모델 및 코드 생성
+- **GoRouter**: 라우팅 및 네비게이션
+- **Dio**: 네트워크 통신
+- **Firebase**: 인증, Functions, Firestore 연동
+- **Custom Font**: `SeoulHangangB` 폰트 적용
+
+### Backend (Cloud Functions)
+- **Node.js (v22) + TypeScript**
+- **Firebase Functions**: 서버리스 API
+- **Firebase Admin SDK**: Firestore 데이터 관리
+- **Axios**: 외부 API(서울시 동물 입양 API) 연동
